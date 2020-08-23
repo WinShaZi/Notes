@@ -1,0 +1,2 @@
+//release的作用是交出指针指向对象的控制权，但是shared_ptr是多对一的关系，一个shared_ptr交出控制权，
+//其它shared_ptr依旧可以控制这个对象。因此这个方法对shared_ptr无意义

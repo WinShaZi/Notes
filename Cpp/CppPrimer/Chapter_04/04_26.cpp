@@ -1,0 +1,1 @@
+//有些机器unsigned int 并非32位

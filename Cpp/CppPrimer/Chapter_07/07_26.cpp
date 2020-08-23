@@ -1,0 +1,1 @@
+//inline double avg_price() const { return units_sold ? revenue/units_sold : 0; }

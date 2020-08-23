@@ -1,0 +1,1 @@
+//HasPtr(const HasPtr& hp) : ps (new string(*hp.ps)), i (hp.i) {}

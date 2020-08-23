@@ -1,0 +1,1 @@
+//mathLib::MatrixLib::matrix mathLib::MatrixLib::operator*(matrix &a,matrix &b);

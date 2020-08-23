@@ -1,0 +1,3 @@
+//err_msg只能够接受string类型的实参或者能转换成string类型的实参
+
+//errorMsg能够接受多个任何不同类型的实参。但是errorMsg的编写相对繁琐

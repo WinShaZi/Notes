@@ -1,0 +1,1 @@
+//d : char sr[12] = "fundamental"; 

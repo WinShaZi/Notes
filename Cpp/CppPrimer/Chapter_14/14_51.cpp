@@ -1,0 +1,1 @@
+//会优先调用calc(int)，因为doube转int是标准类型转换，而LongDouble转int是用户自定义转换

@@ -1,0 +1,1 @@
+//Foo Foo::sorted() const & { return Foo(*this).sorted(); }

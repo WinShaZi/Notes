@@ -1,0 +1,1 @@
+//using compare = bool (*)(const Sales_data&, const Sales_data&);

@@ -1,0 +1,1 @@
+//const std::string Sales_data::*pdata;

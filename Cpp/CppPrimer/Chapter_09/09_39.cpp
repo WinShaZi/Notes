@@ -1,0 +1,2 @@
+//先给一个vector分配1024大小的空间，将输入的值保存进vector。如果输入的元素大于1024，vector会自动扩容
+//最后使用resize能改变vector的size
