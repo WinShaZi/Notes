@@ -61,6 +61,9 @@ rand();         # 返回[0, 1]之间的随机数
 srand(x);       # 设置以rand()的种子值
 
 # 字符串函数
+asorti(arr, temp);          # 将arr中的索引按照自然排序存储在temp中，索引值为连续自然数字
+asort(arr, temp);           # 将arr中的值按照自然排序存储在temp中，索引值为连续自然数字
+gensub(reg, str, mod, src); # 用reg匹配src，若mod为g或G开头的字符串则用str替换匹配之处，若mod为数字，则替换第mod处的匹配
 gsub(reg, str, src);        # 将src中全部的reg匹配之处替换为str，src未给参数默认为$0
 sub(reg, str, src);         # 将src中第一个reg匹配之处替换为str，src未给参数默认为$0
 substr(str, beg, len);      # 截取str中从第[beg, beg + len)的子串，len为给参数默认为到结尾

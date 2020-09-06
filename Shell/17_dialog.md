@@ -1,4 +1,4 @@
-# 图形化界面
+# dialog
 
 ``` shell
 # 安装dialog
@@ -68,80 +68,80 @@ width=60
 
 ``` shell
 # 消息框，仅提醒
-dialog  --no-shadow --title ${title} --infobox ${content} ${height} ${width}
+dialog --no-shadow --title ${title} --infobox ${content} ${height} ${width}
 
 # 消息框，有确认键
-dialog  --title ${title} --msgbox ${content} ${height} ${width}
+dialog --no-shadow --title ${title} --msgbox ${content} ${height} ${width}
 
 # 确认框，添加确认取消键
-dialog  --no-shadow --title ${title} --yesno ${content} ${height} ${width}
+dialog --no-shadow --title ${title} --yesno ${content} ${height} ${width}
 
 # 输入框
 dialog --no-shadow --title ${title} --inputbox ${content} ${height} ${width}
 
 # 密码框，输入显示*
-dialog  --no-shadow --insecure --title ${title} --passwordbox ${content} ${height} ${width}
+dialog --no-shadow --insecure --title ${title} --passwordbox ${content} ${height} ${width}
 
 # 文本框，显示file文件中的内容
-dialog  --no-shadow --title ${title} --textbox ${file} ${height} ${width}
+dialog --no-shadow --title ${title} --textbox ${file} ${height} ${width}
 
 # 文本显示
-dialog  --no-shadow --title ${title} --tailbox ${file} ${height} ${width}
+dialog --no-shadow --title ${title} --tailbox ${file} ${height} ${width}
 
 # 文本显示，后台
-dialog  --no-shadow --title ${title} --tailboxbg ${file} ${height} ${width}
+dialog --no-shadow --title ${title} --tailboxbg ${file} ${height} ${width}
 
 # 菜单框，代表有5个选项
 # 序号  内容
-dialog  --no-shadow --title ${title} --menu ${content} ${height} ${width} 5 \
+dialog --no-shadow --title ${title} --menu ${content} ${height} ${width} 5 \
     1 "one" \
     2 "two" \
     3 "three"
 
 # 可编辑菜单框
 # 序号  内容
-dialog  --no-shadow --title ${title} --inputmenu ${file} ${height} ${width} 5 \
+dialog --no-shadow --title ${title} --inputmenu ${file} ${height} ${width} 5 \
     1 "one" \
     2 "two" \
     3 "three"
 
 # 单选框
 # 序号  内容  状态
-dialog  --no-shadow --title ${title} --radiolist ${content} ${height} ${width} 5 \
+dialog --no-shadow --title ${title} --radiolist ${content} ${height} ${width} 5 \
     1 "one"     on  \
     2 "two"     off \
     3 "three"   off
 
 # 复选择框
 # 标签  内容  序号
-dialog  --no-shadow --title ${title} --checklist ${content} ${height} ${width} 5 \
+dialog --no-shadow --title ${title} --checklist ${content} ${height} ${width} 5 \
     "1" "one"   1 \
     "2" "two"   2 \
     "3" "three" 3
 
 # 文件选择框
-dialog --title "${title}" --fselect ${HOME} ${height} ${width}
+dialog --no-shadow --title "${title}" --fselect ${HOME} ${height} ${width}
 
 # 日期框
-dialog  --no-shadow --title ${title} --calendar ${content} ${height} ${width}
+dialog --no-shadow --title ${title} --calendar ${content} ${height} ${width}
 
 # 指定日期，2020-02-20
-dialog  --no-shadow --title ${title} --calendar ${content} ${height} ${width}  20 02 2020
+dialog --no-shadow --title ${title} --calendar ${content} ${height} ${width}  20 02 2020
 
 # 时间框
-dialog  --no-shadow --title ${title} --timebox ${content} ${height} ${width}
+dialog --no-shadow --title ${title} --timebox ${content} ${height} ${width}
 
 # 指定时间，12:34:56
-dialog  --no-shadow --title ${title} --timebox ${content} ${height} ${width} 12 34 56
+dialog --no-shadow --title ${title} --timebox ${content} ${height} ${width} 12 34 56
 
 # 倒计时10s
 dialog  --no-shadow --title ${title} --pause ${content} ${height} ${width} 10
 
 # 进度条，进度为33
-dialog  --no-shadow --title ${title} --gauge ${content} ${height} ${width} 33
+dialog --no-shadow --title ${title} --gauge ${content} ${height} ${width} 33
 
 # 实时动态进度条
-for i in {1..100}; do echo ${i}; done | dialog  --no-shadow --title ${title} --gauge ${content} ${height} ${width}
+for i in {1..100}; do echo ${i}; done | dialog --no-shadow --title ${title} --gauge ${content} ${height} ${width}
 
 # 框架
 # 标签  序号  标签缩进  输入框内容  输入框显示序号对应内容  标签缩进长度  输入框显示长度 输入框允许输入长度
