@@ -5,7 +5,7 @@
 ``` shell
 if test ${a} -gt ${b}
 then
-    #code
+    # code
 fi
 ```
 
@@ -14,7 +14,7 @@ fi
 ``` shell
 if test ${a} = ${b}
 then
-    #code
+    # code
 fi
 ```
 
@@ -23,6 +23,6 @@ fi
 ``` shell
 if test -e ${a}
 then
-    #code
+    # code
 fi
 ```
