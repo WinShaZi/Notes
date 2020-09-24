@@ -6,6 +6,7 @@ str2="bar"
 str3="bug"
 file1="111.log"
 file2="222.log"
+file3="SedScript"
 ```
 
 ## 替换
@@ -19,6 +20,12 @@ sed "s/${str1}/${str2}/g" ${file1}
 
 # 将替换之后的匹配行打印出来
 sed -n "s/${str1}/${str2}/p" ${file1}
+
+# 直接修改源文件
+sed -i "s/${str1}/${str2}/g" ${file1}
+
+# 用脚本中的sed命令执行
+sed -f ${file3} ${file1}
 
 # 将替换之后的结果写入到文件file2
 sed "s/${str1}/${str2}/w ${file2}" ${file1}
