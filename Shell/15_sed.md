@@ -64,7 +64,7 @@ sed "2 {
 sed "d" ${file1}
 
 # 删除第2行
-sed "1 d" ${file1}
+sed "2 d" ${file1}
 
 # 删除2到4行
 sed "2,4 d" ${file1}

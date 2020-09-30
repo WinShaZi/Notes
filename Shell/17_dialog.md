@@ -7,6 +7,7 @@ sudo yum install -y dialog
 title="标题"
 content="内容"
 file="111.log"
+tempfile="tempfile"
 height=20
 width=60
 ```
@@ -160,4 +161,13 @@ dialog --insecure --title ${title} --passwordform ${content} ${height} ${width} 
     "two_:"     2 3 "" 2 10 7 5 \
     "three_:"   3 1 "" 3 10 7 5 \
     "four_:"    4 2 "" 4 10 7 5
+```
+
+## 获取输入
+
+``` shell
+# 将输入内容定向到tempfile文件中
+dialog --no-shadow --title ${title} --inputbox ${content} ${height} ${width} 2>${tempfile}
+# 获取对话框的选择，确认：0，取消：1
+echo "$?"
 ```
