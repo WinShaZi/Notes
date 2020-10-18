@@ -1,14 +1,12 @@
-# 普通连接
-
-``` Cpp
 #include <iostream>
 #include <mysql/jdbc.h>
 
 int main()
 {
-    try {
-        sql::Driver* driver = nullptr;
-        sql::Connection* connect = nullptr;
+    try
+    {
+        sql::Driver *driver = nullptr;
+        sql::Connection *connect = nullptr;
 
         driver = sql::mysql::get_driver_instance();
         // 第一种连接方式
@@ -21,7 +19,8 @@ int main()
         connect->close();
         delete connect;
     }
-    catch (sql::SQLException& e) {
+    catch (sql::SQLException &e)
+    {
         std::cout << "# CODE  : [" << e.getErrorCode() << "]" << std::endl;
         std::cout << "# STATE : [" << e.getSQLStateCStr() << "]" << std::endl;
         std::cout << "# ERR   : [" << e.what() << "]" << std::endl;
@@ -29,4 +28,3 @@ int main()
 
     return 0;
 }
-```
