@@ -44,4 +44,7 @@ grep -e "${str}" ${file1}
 
 # 将file2内容作为关键字与file1进行匹配
 grep -f ${file2} ${file1}
+
+# 递归搜索当前路径下包含str的行
+grep -r "${str}" ./
 ```
