@@ -19,6 +19,11 @@ enum class Number
 
 int main(int argc, char const *argv[])
 {
+    /**
+     * 输出
+     * 0
+     * 0
+     */
     std::cout << RED << std::endl;
     std::cout << int(Number::ZERO) << std::endl;
 

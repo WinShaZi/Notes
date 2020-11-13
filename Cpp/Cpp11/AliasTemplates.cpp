@@ -11,6 +11,12 @@ int main(int argc, char const *argv[])
     Vec<int> vi1 = {1, 2, 3};
     VecInt vi2 = vi1;
 
+    /**
+     * 输出
+     * 1
+     * 2
+     * 3
+     */
     for (size_t i = 0; i < vi2.size(); i++)
     {
         std::cout << vi2[i] << std::endl;

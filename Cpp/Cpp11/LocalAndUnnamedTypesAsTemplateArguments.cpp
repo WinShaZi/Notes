@@ -25,9 +25,18 @@ int main(int argc, char const *argv[])
     {
         ONE
     };
+    
+    /**
+     * 输出
+     * Test
+     */
     Func(Test<ST>());
+    
+    /**
+     * 输出
+     * 0
+     */
     Func(ONE);
 
-    system("pause");
     return 0;
 }

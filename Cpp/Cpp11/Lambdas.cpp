@@ -15,6 +15,11 @@ int main(int argc, char const *argv[])
 
     // 一般调用
     auto func = []() { std::cout << "func" << std::endl; };
+
+    /**
+     * 输出
+     * func
+     */
     func();
 
     // 直接调用返回值
@@ -29,6 +34,10 @@ int main(int argc, char const *argv[])
     }
     catch (const std::exception &e)
     {
+        /**
+         * 输出
+         * invalid_argument
+         */
         std::cout << e.what() << std::endl;
     }
 

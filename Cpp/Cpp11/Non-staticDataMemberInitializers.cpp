@@ -19,6 +19,10 @@ int main()
 {
     Test t;
 
+    /**
+     * 输出
+     * 1 2 3 4
+     */
     std::cout << t.sc_i << " " << t.s_i << " " << t.c_i << " " << t.i << std::endl;
 
     return 0;

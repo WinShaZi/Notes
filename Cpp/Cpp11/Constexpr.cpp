@@ -12,6 +12,10 @@ int main(int argc, char const *argv[])
 {
     char str[GetValue()] = {'\0'};
 
+    /**
+     * 输出
+     * 10
+     */
     std::cout << sizeof(str) << std::endl;
 
     return 0;

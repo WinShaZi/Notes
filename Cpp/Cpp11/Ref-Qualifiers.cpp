@@ -18,9 +18,18 @@ int main()
     // 成员函数参数列表后既有const又有引用限定符的话，引用限定符必须在const限定符后面
 
     Test t;
+    
+    /**
+     * 输出
+     * LeftFunc
+     */
     t.LeftFunc();
     // t.RightFunc(); // error
 
+    /**
+     * 输出
+     * right
+     */
     Test().RightFunc();
     // Test().LeftFunc(); // error
 
