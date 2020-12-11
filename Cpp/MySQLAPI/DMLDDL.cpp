@@ -11,12 +11,14 @@ int main()
         sql::Connection *connect = nullptr;
 
         driver = sql::mysql::get_driver_instance();
-        connect = driver->connect("tcp://Host:Port/Database", "Username", "Password");
+        connect = driver->connect("tcp://localhost:3306/testdb", "root", "asdf");
 
-        std::cout << state->executeUpdate("SQL") << std::endl;
+        std::cout << state->executeUpdate("USE testdb") << std::endl;
 
         connect->close();
+
         delete connect;
+        delete driver;
     }
     catch (sql::SQLException &e)
     {

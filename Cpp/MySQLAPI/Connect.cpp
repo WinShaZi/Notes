@@ -10,14 +10,16 @@ int main()
 
         driver = sql::mysql::get_driver_instance();
         // 第一种连接方式
-        connect = driver->connect("tcp://Host:Port/Database", "Username", "Password");
+        connect = driver->connect("tcp://localhost:3306/testdb", "root", "asdf");
 
         // 第二种连接方式
-        // connect = driver->connect("tcp://Host:Port", "Username", "Password");
-        // connect->setSchema("Database");
+        // connect = driver->connect("tcp://localhost:3306", "root", "asdf");
+        // connect->setSchema("testdb");
 
         connect->close();
+
         delete connect;
+        delete driver;
     }
     catch (sql::SQLException &e)
     {

@@ -11,9 +11,9 @@ int main()
         sql::Connection *connect = nullptr;
 
         driver = sql::mysql::get_driver_instance();
-        connect = driver->connect("tcp://Host:Port/Database", "Username", "Password");
+        connect = driver->connect("tcp://localhost:3306/testdb", "root", "asdf");
 
-        result = state->executeQuery("SQL");
+        result = state->executeQuery("SELECT NOW()");
         while (result->next())
         {
             std::cout << result->getInt(1) << std::endl;

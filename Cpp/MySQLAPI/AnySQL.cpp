@@ -11,11 +11,11 @@ int main()
         sql::ResultSet *result = nullptr;
 
         driver = sql::mysql::get_driver_instance();
-        connect = driver->connect("tcp://Host:Port/Database", "Username", "Password");
+        connect = driver->connect("tcp://localhost:3306/testdb", "root", "asdf");
 
         state = connect->createStatement();
 
-        if (state->execute("SQL")) // 执行有结果返回的语句返回true，其他为false
+        if (state->execute("SELECT VERSION()")) // 执行有结果返回的语句返回true，其他为false
         {
             result = state->getResultSet();
 
@@ -31,6 +31,7 @@ int main()
         delete state;
         delete result;
         delete connect;
+        delete driver;
     }
     catch (sql::SQLException &e)
     {
