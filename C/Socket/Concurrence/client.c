@@ -8,14 +8,14 @@
 
 #define BUF_SIZE 256
 
-void ReadRoutine(int sock, char * message)
+void ReadRoutine(int sock, char *message)
 {
     while (1)
     {
         int length = read(sock, message, BUF_SIZE);
         if (0 == length)
         {
-            puts("Server disconnected");
+            puts("server disconnected");
             return;
         }
         message[length] = 0;
@@ -23,13 +23,19 @@ void ReadRoutine(int sock, char * message)
     }
 }
 
-void WriteRoutine(int sock, char * message)
+void WriteRoutine(int sock, char *message)
 {
     while (1)
     {
+        printf("Input message(q to quit) : ");
         scanf("%s", message);
         if (strcmp(message, "q") == 0 || strcmp(message, "Q") == 0)
         {
+            /**
+             * SHUT_RD：断开输入流。套接字无法接收数据（即使输入缓冲区收到数据也被抹去），无法调用输入相关函数
+             * SHUT_WR：断开输出流。套接字无法发送数据，但如果输出缓冲区中还有未传输的数据，则将传递到目标主机
+             * SHUT_RDWR：同时断开 I/O 流。相当于分两次调用shutdown()，其中一次以SHUT_RD为参数，另一次以SHUT_WR为参数
+             */
             shutdown(sock, SHUT_WR);
             return;
         }
@@ -61,7 +67,8 @@ int main(int argc, char const *argv[])
     char message[BUF_SIZE] = "\0";
 
     __pid_t pid = fork();
-    if(0 == pid)
+    // 子进程处理写，父进程处理读
+    if (0 == pid)
     {
         WriteRoutine(clientSock, message);
     }

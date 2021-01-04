@@ -14,7 +14,7 @@ int arrClient[MAX_CLIENT] = {0};
 pthread_mutex_t mutex;
 
 void SendMsg(char *msg, int length);
-void * DealClient(void *arg);
+void *DealClient(void *arg);
 
 int main(int argc, char const *argv[])
 {
@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
 
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(8080);
-    serverAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
     if (bind(serverSock, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1)
     {
@@ -58,14 +58,14 @@ int main(int argc, char const *argv[])
         pthread_create(&pt, NULL, DealClient, (void *)&clientSock);
         // 处理客户端的线程设置为分离，避免主线程等待
         pthread_detach(pt);
-        printf("Connect client IP : %d\n", clientSock);
+        printf("connect client socket : %d\n", clientSock);
     }
     close(serverSock);
 
     return 0;
 }
 
-void * DealClient(void *arg)
+void *DealClient(void *arg)
 {
     int clientSock = *((int *)arg);
 
@@ -96,12 +96,14 @@ void * DealClient(void *arg)
     pthread_mutex_unlock(&mutex);
 
     close(clientSock);
+
     return NULL;
 }
 
 void SendMsg(char *msg, int length)
 {
     pthread_mutex_lock(&mutex);
+    // 对所有已连接的服务端发送消息
     for (int i = 0; i < clientNum; i++)
     {
         write(arrClient[i], msg, length);

@@ -14,9 +14,9 @@
 void ChildProcess(int sig)
 {
     int status = 0;
-    __pid_t pid = waitpid(-1, &status, WNOHANG);    // -1:等待任何子进程；WNOHANG:非阻塞
+    __pid_t pid = waitpid(-1, &status, WNOHANG); // -1:等待任何子进程；WNOHANG:非阻塞
     printf("Remove process ID : %d\n", pid);
-    if (WIFEXITED(status))      // 是否正常关闭
+    if (WIFEXITED(status)) // 是否正常关闭
     {
         printf("Child process : %d\n", WEXITSTATUS(status));
     }
@@ -28,7 +28,7 @@ void ChildProcess(int sig)
 
 int main(int argc, char const *argv[])
 {
-    signal(SIGCHLD, ChildProcess);  // 当有子进程关闭时，激活信息
+    signal(SIGCHLD, ChildProcess); // 当有子进程关闭时，激活信息
 
     int serverSock = 0;
     int clientSock = 0;
@@ -50,7 +50,7 @@ int main(int argc, char const *argv[])
 
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(8080);
-    serverAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
     if (bind(serverSock, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1)
     {
@@ -74,15 +74,16 @@ int main(int argc, char const *argv[])
         }
         else
         {
-            puts("New Client connected...");
+            puts("new client connected...");
         }
         __pid_t pid = fork();
+        // 创建进程失败则关闭客户端socket
         if (-1 == pid)
         {
             close(clientSock);
             continue;
         }
-        if (0 == pid)       // 当前是子进程时处理数据传输
+        if (0 == pid) // 当前是子进程时处理数据传输
         {
             close(serverSock);
             int length = 0;
@@ -93,7 +94,7 @@ int main(int argc, char const *argv[])
                 printf("[client %d] : %s\n", clientSock, message);
             }
             close(clientSock);
-            puts("Client disconnected...");
+            puts("client disconnected...");
             return 0;
         }
         else

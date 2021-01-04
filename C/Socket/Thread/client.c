@@ -37,6 +37,7 @@ int main(int argc, char const *argv[])
 
     pthread_t ptSend = 0;
     pthread_t ptReceive = 0;
+    // 创建两个线程一个发送数据，一个接收数据
     pthread_create(&ptSend, NULL, SendMsg, (void *)&clinetSock);
     pthread_create(&ptReceive, NULL, RecviveMsg, (void *)&clinetSock);
     pthread_join(ptSend, NULL);
@@ -54,6 +55,7 @@ void *SendMsg(void *arg)
     while (1)
     {
         char message[BUF_SIZE] = "\0";
+        printf("Input message(q to quit) : ");
         scanf("%s", message);
         if (strcmp(message, "q") == 0 || strcmp(message, "Q") == 0)
         {
@@ -78,7 +80,7 @@ void *RecviveMsg(void *arg)
         if (length > 0)
         {
             message[BUF_SIZE] = 0;
-            fprintf(stdout, "[server] : %s\n", message);
+            printf("[server] : %s\n", message);
         }
         else
         {
