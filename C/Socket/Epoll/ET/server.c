@@ -1,6 +1,5 @@
-
 /**
- * 边缘触发，无论缓冲区内是否有剩余未读取的数据，都只注册一次事件 
+ * 边缘触发：无论缓冲区内是否有剩余未读取的数据，都只注册一次事件 
 **/
 
 #include <stdio.h>
@@ -63,14 +62,12 @@ int main(int argc, char const *argv[])
 
     while (1)
     {
-        int clientEvent = epoll_wait(epollFd, epollEvents, EPOLL_SIZE, -1);     // 等待事件的发生
+        int clientEvent = epoll_wait(epollFd, epollEvents, EPOLL_SIZE, -1); // 等待事件的发生
         if (-1 == clientEvent)
         {
             puts("epoll_wait() error");
             break;
         }
-
-        puts("Return epoll_wait");
 
         for (int i = 0; i < clientEvent; i++)
         {
@@ -81,34 +78,33 @@ int main(int argc, char const *argv[])
                 socklen_t addrLength = sizeof(clientAddr);
                 clientSock = accept(serverSock, (struct sockaddr *)&clientAddr, &addrLength);
                 SetNonblockingMode(clientSock);
-                event.events = EPOLLIN | EPOLLET;       // 设置为边缘触发
+                event.events = EPOLLIN | EPOLLET; // 设置为边缘触发
                 event.data.fd = clientSock;
-                epoll_ctl(epollFd, EPOLL_CTL_ADD, clientSock, &event);      // 从监听中增加该套接字
-                printf("Connected client : %d\n", clientSock);
+                epoll_ctl(epollFd, EPOLL_CTL_ADD, clientSock, &event); // 从监听中增加该套接字
+                printf("connected client : %d\n", clientSock);
             }
             else
             {
                 char buf[BUF_SIZE] = "\0";
-                int length = read(epollEvents[i].data.fd, buf, BUF_SIZE);
+                int length = read(tempEpFd, buf, BUF_SIZE);
                 if (length > 0)
                 {
                     write(tempEpFd, buf, length);
-                    printf("[client] : %s\n", buf);
+                    printf("[client %d] : %s\n", tempEpFd, buf);
                 }
                 else if (length == 0)
                 {
-                    epoll_ctl(epollFd, EPOLL_CTL_DEL, tempEpFd, NULL);      // 从监听中删除该套接字
+                    epoll_ctl(epollFd, EPOLL_CTL_DEL, tempEpFd, NULL); // 从监听中删除该套接字
                     close(tempEpFd);
-                    printf("Closed client : %d\n", tempEpFd);
+                    printf("closed client : %d\n", tempEpFd);
                 }
                 else
                 {
                     if (errno == EAGAIN)
                     {
-                        break;      // 标志已经读取了缓冲内全部的数据
+                        break; // 标志已经读取了缓冲内全部的数据
                     }
                 }
-                
             }
         }
     }
