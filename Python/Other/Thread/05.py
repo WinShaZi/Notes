@@ -6,6 +6,7 @@ g_value = 0
 
 
 def Run(label, n):
+    # 当外部变量需要在内部进行操作时，需要声明为global
     global g_value
     i = 0
     while i < n:
