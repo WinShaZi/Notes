@@ -1,6 +1,6 @@
 # 参数数量不确定，参数为元组
-def Food(*argu):
-    print(argu)
+def Food(*argv):
+    print(argv)
 
 
 Food('1')
