@@ -37,7 +37,7 @@ public:
 
             while (m_queue.size() <= m_maxSize)
             {
-                int value = random();
+                int value = rand();
                 std::cout << "push " << value << std::endl;
                 m_queue.push(value);
             }

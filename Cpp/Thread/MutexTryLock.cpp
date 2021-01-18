@@ -2,7 +2,6 @@
 #include <thread>
 #include <mutex>
 #include <queue>
-#include <unistd.h>
 
 class Repository
 {
@@ -28,7 +27,7 @@ public:
             {
                 if (m_queue.size() < m_maxSize)
                 {
-                    int value = random();
+                    int value = rand();
                     std::cout << "push " << value << std::endl;
                     m_queue.push(value);
                 }
@@ -38,7 +37,6 @@ public:
                 }
 
                 m_mtx.unlock();
-                sleep(1);
             }
         }
     }
@@ -60,7 +58,6 @@ public:
                 }
 
                 m_mtx.unlock();
-                sleep(1);
             }
         }
     }

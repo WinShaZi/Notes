@@ -1,19 +1,21 @@
 #include <iostream>
 #include <thread>
-#include <mutex>
+#include <atomic>
 #include <queue>
 
 class Repository
 {
 private:
     std::queue<int> m_queue;
-    std::mutex m_mtx;
+    // 利用原子操作特性做成类似互斥锁
+    std::atomic_bool m_amc;
     size_t m_maxSize;
 
 public:
     Repository(const size_t &size = 10)
     {
         m_maxSize = size < 10 ? 10 : size;
+        m_amc.store(false);
     }
 
     ~Repository() {}
@@ -22,8 +24,11 @@ public:
     {
         while (true)
         {
-            // 构造时加锁，析构时解锁，可以转移所有权
-            std::unique_lock<std::mutex> uLock(m_mtx);
+            // 获取其值，当其值为false时，进入下一轮循环
+            if (!m_amc.load())
+            {
+                continue;
+            }
 
             if (m_queue.size() < m_maxSize)
             {
@@ -36,8 +41,8 @@ public:
                 std::cout << "Repository is full" << std::endl;
             }
 
-            // 提前解锁
-            uLock.unlock();
+            // 设置其值
+            m_amc.store(false);
         }
     }
 
@@ -45,15 +50,10 @@ public:
     {
         while (true)
         {
-            /**
-             * std::defer_lock      不获得互斥的所有权
-             * try_to_lock          尝试获得互斥的所有权而不阻塞
-             * adopt_lock           假设调用方线程已拥有互斥的所有权
-             */
-            std::unique_lock<std::mutex> uLock(m_mtx, std::defer_lock);
-
-            // 此时加锁
-            uLock.lock();
+            if (m_amc.load())
+            {
+                continue;
+            }
 
             if (!m_queue.empty())
             {
@@ -65,8 +65,7 @@ public:
                 std::cout << "Repository is empty" << std::endl;
             }
 
-            // 此时解锁
-            uLock.unlock();
+            m_amc.store(true);
         }
     }
 };

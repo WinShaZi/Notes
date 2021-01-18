@@ -2,7 +2,6 @@
 #include <thread>
 #include <mutex>
 #include <queue>
-#include <unistd.h>
 
 class Repository
 {
@@ -23,22 +22,19 @@ public:
     {
         while (true)
         {
-            {
-                // 在构造时进行加锁，在析构时进行解锁，不可以中途解锁
-                std::lock_guard<std::mutex> gLock(m_mtx);
+            // 在构造时进行加锁，在析构时进行解锁，不可以中途解锁
+            std::lock_guard<std::mutex> gLock(m_mtx);
 
-                if (m_queue.size() < m_maxSize)
-                {
-                    int value = random();
-                    std::cout << "push " << value << std::endl;
-                    m_queue.push(value);
-                }
-                else
-                {
-                    std::cout << "Repository is full" << std::endl;
-                }
+            if (m_queue.size() < m_maxSize)
+            {
+                int value = rand();
+                std::cout << "push " << value << std::endl;
+                m_queue.push(value);
             }
-            sleep(1);
+            else
+            {
+                std::cout << "Repository is full" << std::endl;
+            }
         }
     }
 
@@ -46,20 +42,17 @@ public:
     {
         while (true)
         {
-            {
-                std::lock_guard<std::mutex> gLock(m_mtx);
+            std::lock_guard<std::mutex> gLock(m_mtx);
 
-                if (!m_queue.empty())
-                {
-                    std::cout << "pop " << m_queue.front() << std::endl;
-                    m_queue.pop();
-                }
-                else
-                {
-                    std::cout << "Repository is empty" << std::endl;
-                }
+            if (!m_queue.empty())
+            {
+                std::cout << "pop " << m_queue.front() << std::endl;
+                m_queue.pop();
             }
-            sleep(1);
+            else
+            {
+                std::cout << "Repository is empty" << std::endl;
+            }
         }
     }
 };

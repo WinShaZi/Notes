@@ -22,8 +22,7 @@ public:
     {
         while (true)
         {
-            // 构造时加锁，析构时解锁，可以转移所有权
-            std::unique_lock<std::mutex> uLock(m_mtx);
+            m_mtx.lock();
 
             if (m_queue.size() < m_maxSize)
             {
@@ -36,8 +35,9 @@ public:
                 std::cout << "Repository is full" << std::endl;
             }
 
-            // 提前解锁
-            uLock.unlock();
+            m_mtx.unlock();
+            // 让出CPU片段时间，避免一直占用CPU
+            std::this_thread::yield();
         }
     }
 
@@ -45,15 +45,7 @@ public:
     {
         while (true)
         {
-            /**
-             * std::defer_lock      不获得互斥的所有权
-             * try_to_lock          尝试获得互斥的所有权而不阻塞
-             * adopt_lock           假设调用方线程已拥有互斥的所有权
-             */
-            std::unique_lock<std::mutex> uLock(m_mtx, std::defer_lock);
-
-            // 此时加锁
-            uLock.lock();
+            m_mtx.lock();
 
             if (!m_queue.empty())
             {
@@ -65,8 +57,8 @@ public:
                 std::cout << "Repository is empty" << std::endl;
             }
 
-            // 此时解锁
-            uLock.unlock();
+            m_mtx.unlock();
+            std::this_thread::yield();
         }
     }
 };

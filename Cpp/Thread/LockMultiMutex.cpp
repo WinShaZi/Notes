@@ -2,7 +2,6 @@
 #include <thread>
 #include <mutex>
 #include <queue>
-#include <unistd.h>
 
 class Repository
 {
@@ -29,23 +28,19 @@ public:
              * 当获取不到m_mtxTwo时，立马释放m_mtxOne，避免产生死锁
              */
             std::lock(m_mtxOne, m_mtxTwo);
+            std::lock_guard<std::mutex> uLockOne(m_mtxOne, std::adopt_lock);
+            std::lock_guard<std::mutex> uLockTwo(m_mtxTwo, std::adopt_lock);
+
+            if (m_queue.size() < m_maxSize)
             {
-                std::lock_guard<std::mutex> uLockOne(m_mtxOne, std::adopt_lock);
-                std::lock_guard<std::mutex> uLockTwo(m_mtxTwo, std::adopt_lock);
-
-                if (m_queue.size() < m_maxSize)
-                {
-                    int value = random();
-                    std::cout << "push " << value << std::endl;
-                    m_queue.push(value);
-                }
-                else
-                {
-                    std::cout << "Repository is full" << std::endl;
-                }
+                int value = rand();
+                std::cout << "push " << value << std::endl;
+                m_queue.push(value);
             }
-
-            sleep(1);
+            else
+            {
+                std::cout << "Repository is full" << std::endl;
+            }
         }
     }
 
@@ -72,7 +67,6 @@ public:
                 m_mtxOne.unlock();
                 m_mtxTwo.unlock();
             }
-            sleep(1);
         }
     }
 };

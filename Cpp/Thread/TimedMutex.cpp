@@ -2,8 +2,6 @@
 #include <thread>
 #include <mutex>
 #include <queue>
-#include <unistd.h>
-#include <chrono>
 
 class Repository
 {
@@ -33,7 +31,7 @@ public:
 
                 if (m_queue.size() < m_maxSize)
                 {
-                    int value = random();
+                    int value = rand();
                     std::cout << "push " << value << std::endl;
                     m_queue.push(value);
                 }
@@ -44,8 +42,6 @@ public:
 
                 m_tMtx.unlock();
             }
-
-            sleep(1);
         }
     }
 
@@ -68,7 +64,6 @@ public:
 
                 m_tMtx.unlock();
             }
-            sleep(1);
         }
     }
 };
