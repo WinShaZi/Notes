@@ -8,6 +8,7 @@ void print()
 template <typename T, typename... Args>
 void print(const T &t, const Args &... args)
 {
+    // sizeof...(args); // 获取可变的个数
     std::cout << t;
     print(args...);
 }
