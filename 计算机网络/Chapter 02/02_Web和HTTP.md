@@ -46,24 +46,24 @@ Accept-language:fr
 
 请求行有三个字段，方法字段，URL字段，HTTP版本字段。
 
-	GET /somedir/page.html HTTP/1.1
-	调用GET方法，请求/somedir/page.html对象，HTTP版本为1.1
+    GET /somedir/page.html HTTP/1.1
+    调用GET方法，请求/somedir/page.html对象，HTTP版本为1.1
 
 #### 首部行
 
 首部行有两个字段，首部字段，首部值字段。
 
-	Host: www.someschool.edu
-	主机名为www.someschool.edu
+    Host: www.someschool.edu
+    主机名为www.someschool.edu
 
-	Connection: close
-	发送该请求对象后，关闭该连接
+    Connection: close
+    发送该请求对象后，关闭该连接
 
-	User-agent: Mozilla/5.0
-	浏览器的类型为Mozilla/5.0
+    User-agent: Mozilla/5.0
+    浏览器的类型为Mozilla/5.0
 
-	Accept-language:fr
-	获得该对象的法语版本
+    Accept-language:fr
+    获得该对象的法语版本
 
 #### 方法
 
@@ -101,37 +101,37 @@ Content-Type: text/html
 
 状态行有三个字段，协议版本字段，状态码，状态信息。
 
-	HTTP/1.1 200 OK
-	HTTP协议版本为1.1，状态码为200，状态信息为OK
+    HTTP/1.1 200 OK
+    HTTP协议版本为1.1，状态码为200，状态信息为OK
 
 #### 首部行
 
 首部行有两个字段，首部字段，首部值字段。
 
-	Connection: close
-	告诉客户，发送完该请求数据后关闭该连接
+    Connection: close
+    告诉客户，发送完该请求数据后关闭该连接
 
-	Date: Tue, 18 Aug 2015 15:44:04 GMT
-	产生并发送该响应报文的时间和日期
+    Date: Tue, 18 Aug 2015 15:44:04 GMT
+    产生并发送该响应报文的时间和日期
 
-	Server: Apache/2.2.3 (CentOS)
-	表示该报文时运行在CentOS系统中的Apache Web服务器产生的
+    Server: Apache/2.2.3 (CentOS)
+    表示该报文时运行在CentOS系统中的Apache Web服务器产生的
 
-	Last-Modified: Tue, 18 Aug 2015 15:11:03 GMT
-	表示改文件最后一次修改的时间
+    Last-Modified: Tue, 18 Aug 2015 15:11:03 GMT
+    表示改文件最后一次修改的时间
 
-	Content-Length: 6821
-	被发送对象中的字节数
+    Content-Length: 6821
+    被发送对象中的字节数
 
-	Content-Type: text/html
-	表示该实体体中的对象是HTML文本
+    Content-Type: text/html
+    表示该实体体中的对象是HTML文本
 
 #### 实时体
 
 实体体是报文的主要部分，即它包含了所有请求对象本身。
 
-	(data data data)
-	请求对象
+    (data data data)
+    请求对象
 
 #### 状态码 状态信息
 
@@ -180,8 +180,8 @@ If-modified-since: Wed, 9 Sep 2015 09:23:24
 
 #### 首部行
 
-	If-modified-since: Wed, 9 Sep 2015 09:23:24
-	告诉服务器，仅当文件在此时间之后修改过才发送对象
+    If-modified-since: Wed, 9 Sep 2015 09:23:24
+    告诉服务器，仅当文件在此时间之后修改过才发送对象
 
 ### 响应报文
 
@@ -195,10 +195,10 @@ Server: Apache/1.3.0 (UNIX)
 
 #### 状态行
 
-	HTTP/1.1 304 Not Modified
-	标志该文件在这个时间后并没有被修改过
+    HTTP/1.1 304 Not Modified
+    标志该文件在这个时间后并没有被修改过
 
 #### 实体体
 
-	(empty entity body)
-	由于没有被修改过故不发送对象实体体
+    (empty entity body)
+    由于没有被修改过故不发送对象实体体
