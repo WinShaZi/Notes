@@ -79,7 +79,7 @@ Accept-language:fr
 
 #### 请求报文通用格式
 
-![](../image/HTTP请求报文.png)
+![HTTP请求报文](../image/HTTP请求报文.png)
 
 ### 响应报文
 
@@ -143,20 +143,20 @@ Content-Type: text/html
 
 #### 响应报文通用格式
 
-![](../image/HTTP响应报文.png)
+![HTTP响应报文](../image/HTTP响应报文.png)
 
 ## 用户于服务器的交互：cookie
 
 HTTP协议是无状态的，Web站点通过cookie技术来识别和记录用户。
 第一次访问服务器时，服务器会生成cookie识别码。通过响应报文中的Set-cookie首部将该用户的cookie识别码发给浏览器，浏览器将其记录下来。之后每次访问该服务时，都会向服务器发送cookie识别码，以识别该用户，记录该用户在服务器上的访问历史记录。
 
-![](../image/cookie.png)
+![cookie](../image/cookie.png)
 
 ## Web缓存
 
 Web缓存器也叫代理服务器，它是能够代表初始Web服务器来满足HTTP请求的网络实体。Web缓冲器有自己的磁盘储存空间，并在储存空间中保存最近请求过的对象的副本。当客户请求数据时，优先从Web缓存器中请求可以有效降低时延。
 
-![](../image/Web缓存器拓扑.png)
+![Web缓存器拓扑](../image/Web缓存器拓扑.png)
 
 ### Web缓存器工作流程
 

@@ -21,7 +21,7 @@ UDP不维护连接状态，也不跟踪这些参数。因此，UDP应用程序�
 
 ## UDP报文段
 
-![](../image/UDP报文段.png)
+![UDP报文段](../image/UDP报文段.png)
 
 ## UDP校验和
 
