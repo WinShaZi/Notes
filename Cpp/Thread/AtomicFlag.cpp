@@ -7,7 +7,7 @@ class Repository
 {
 private:
     std::queue<int> m_queue;
-    // 利用std::mtomic_flag完成自旋锁
+    // 利用std::atomic_flag完成自旋锁
     std::atomic_flag m_flag;
     size_t m_maxSize;
 
